@@ -39,7 +39,7 @@ bool Texture::Load(const std::string& filename, Renderer& renderer) {
 vec2 Texture::GetSize() {
     float w, h;
     SDL_GetTextureSize(m_texture, &w, &h);
-    std::cout << "[DEBUG] Texture Size: " << w << " x " << h << std::endl;
+    
     return vec2{ w, h };
 }
 

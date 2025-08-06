@@ -126,7 +126,7 @@ void SpaceGame::Shutdown() {
 }
 
 void SpaceGame::Draw(viper::Renderer& renderer) {
-    
+    /*
     if (m_gameState == GameState::Title) {
     
 	m_titleText->Create(renderer, "PIT VIPER", viper::vec3{ 1, 0, 0 }); //exception thrown when this line of code trys to create
@@ -148,6 +148,7 @@ void SpaceGame::Draw(viper::Renderer& renderer) {
 
     viper::GetEngine().GetPS().Draw(renderer);
     
+    */
 
 }
 
