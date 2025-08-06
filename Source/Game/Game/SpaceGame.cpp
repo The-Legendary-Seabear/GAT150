@@ -13,6 +13,7 @@
 #include "Framework/Actor.h"
 #include "Audio/AudioSystem.h"
 #include "Core/File.h"
+#include "Resources/ResourceManager.h"
 
 #include <vector>
 #include <iostream>
@@ -22,16 +23,17 @@ bool SpaceGame::Initialize() {
     m_scene = std::make_unique<viper::Scene>(this);
 
 	
-
+    /*
     m_titleFont = std::make_shared<viper::Font>();
     m_titleFont->Load("Archeologicaps.ttf", 128);
 
     m_uiFont = std::make_shared<viper::Font>();
     m_uiFont->Load("Archeologicaps.ttf", 48);
-
-    m_titleText = std::make_unique<viper::Text>(m_titleFont);
-    m_scoreText = std::make_unique<viper::Text>(m_uiFont);
-    m_livesText = std::make_unique<viper::Text>(m_uiFont);
+    */
+    //it only loads the first font size
+    m_titleText = std::make_unique<viper::Text>(viper::ResourceManager::Instance().Get<viper::Font>("Archeologicaps.ttf", 128.0f));
+    m_scoreText = std::make_unique<viper::Text>(viper::ResourceManager::Instance().Get<viper::Font>("Archeologicaps.ttf", 48.0f));
+    m_livesText = std::make_unique<viper::Text>(viper::ResourceManager::Instance().Get<viper::Font>("Archeologicaps.ttf", 48.0f));
 
     
 	
@@ -124,6 +126,7 @@ void SpaceGame::Shutdown() {
 }
 
 void SpaceGame::Draw(viper::Renderer& renderer) {
+    
     if (m_gameState == GameState::Title) {
     
 	m_titleText->Create(renderer, "PIT VIPER", viper::vec3{ 1, 0, 0 }); //exception thrown when this line of code trys to create
@@ -144,6 +147,7 @@ void SpaceGame::Draw(viper::Renderer& renderer) {
     m_scene->Draw(renderer);
 
     viper::GetEngine().GetPS().Draw(renderer);
+    
 
 }
 

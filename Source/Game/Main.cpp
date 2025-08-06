@@ -14,6 +14,8 @@
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
 #include "Core/File.h"
+#include "Resources/ResourceManager.h"
+#include "Renderer/Texture.h"
 
 #include "Game/Player.h"
 #include "Game/SpaceGame.h"
@@ -34,6 +36,7 @@ int main(int argc, char* argv[]) {
 
    //initialize engine
     viper::GetEngine().Initialize();
+
 
     //Initialize Game
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
@@ -57,6 +60,12 @@ int main(int argc, char* argv[]) {
     
     std::vector<FMOD::Sound*> sounds;
    
+   //Texture
+    //auto texture = viper::ResourceManager::Instance().Get<viper::Texture>("creature", viper::GetEngine().GetRenderer());
+    std::shared_ptr<viper::Texture> texture = std::make_shared<viper::Texture>();
+    texture->Load("creature.jpg", viper::GetEngine().GetRenderer());
+
+
 
     //create stars
     /*std::vector<viper::vec2> stars;
@@ -104,6 +113,12 @@ int main(int argc, char* argv[]) {
         viper::GetEngine().GetRenderer().Clear();
 
         viper::GetEngine().Draw();
+
+
+        viper::GetEngine().GetRenderer().DrawTexture(texture.get(), 30, 30);
+
+
+
 
 		//model.Draw(renderer, input.GetMousePosition(), time.GetTime(), 10);
         
