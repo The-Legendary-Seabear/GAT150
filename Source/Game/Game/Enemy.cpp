@@ -52,10 +52,10 @@ void Enemy::Update(float dt) {
     if (fireTimer <= 0 && playerSeen) {
         fireTimer = fireTime;
 
-        std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::enemyDesign, viper::vec3{ 1.0f, 1.0f, 1.0f });
+        //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::enemyDesign, viper::vec3{ 1.0f, 1.0f, 1.0f });
         //spawn rocket at player position and rotation
         viper::Transform transform{ this->transform.position, this->transform.rotation, 2.0f };
-        auto rocket = std::make_unique<Rocket>(transform, model);
+        auto rocket = std::make_unique<Rocket>(transform, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
 
         rocket->speed = 500.0f;
         rocket->lifespan = 1.5f;
@@ -76,8 +76,8 @@ void Enemy::OnCollision(Actor* other) {
 
         int randNum = viper::random::getInt(0, 100);
         if (randNum < 5) {
-            std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::boost, viper::vec3{ 1.0f, 1.0f, 1.0f });
-            FireratePowerup* powerup = new FireratePowerup(viper::Transform{ transform.position, 0.0f, 15.0f } , model);
+            //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::boost, viper::vec3{ 1.0f, 1.0f, 1.0f });
+            FireratePowerup* powerup = new FireratePowerup(viper::Transform{ transform.position, 0.0f, 15.0f } , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
             scene->AddActor(std::unique_ptr<Actor>(powerup));
         }
 

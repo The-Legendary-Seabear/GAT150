@@ -80,10 +80,10 @@ void Player::Update(float dt) {
         fireTimer = fireTime;
         
         
-        std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 1.0f, 1.0f, 1.0f });
+        //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 1.0f, 1.0f, 1.0f });
         //spawn rocket at player position and rotation
         viper::Transform transform{ this->transform.position, this->transform.rotation, 2.0f };
-        auto rocket = std::make_unique<Rocket>(transform, model);
+        auto rocket = std::make_unique<Rocket>(transform, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
 
         rocket->speed = 500.0f;
         rocket->lifespan = 1.5f;
@@ -102,10 +102,10 @@ void Player::Update(float dt) {
         laserTimer = laserTime;
        
             
-            std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::laser, viper::vec3{ 1.0f, 1.0f, 1.0f });
+            //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::laser, viper::vec3{ 1.0f, 1.0f, 1.0f });
             //spawn rocket at player position and rotation
             viper::Transform transform{ this->transform.position, this->transform.rotation, 2.0f };
-            auto laser = std::make_unique<Laser>(transform, model);
+            auto laser = std::make_unique<Laser>(transform, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
 
             laser->speed = 5000.0f;
             laser->lifespan = 10.0f;

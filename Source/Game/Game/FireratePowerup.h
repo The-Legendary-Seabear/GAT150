@@ -4,8 +4,8 @@
 
 class FireratePowerup : public viper::Actor {
 public:
-	FireratePowerup(const viper::Transform& transform, std::shared_ptr<viper::Model> model)
-		: Actor{ transform, model } {
+	FireratePowerup(const viper::Transform& transform, viper::res_t<viper::Texture> texture)
+		: Actor{ transform, texture } {
 		tag = "powerup";
 		name = "fireRatePowerUp";
 	}

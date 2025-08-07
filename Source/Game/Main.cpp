@@ -16,6 +16,7 @@
 #include "Core/File.h"
 #include "Resources/ResourceManager.h"
 #include "Renderer/Texture.h"
+#include "Core/Logger.h"
 
 #include "Game/Player.h"
 #include "Game/SpaceGame.h"
@@ -37,6 +38,7 @@ int main(int argc, char* argv[]) {
    //initialize engine
     viper::GetEngine().Initialize();
 
+    viper::Logger::Info("Initialize engine...");
 
     //Initialize Game
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
@@ -61,9 +63,9 @@ int main(int argc, char* argv[]) {
     std::vector<FMOD::Sound*> sounds;
    
    //Texture
-    //auto texture = viper::ResourceManager::Instance().Get<viper::Texture>("creature", viper::GetEngine().GetRenderer());
-    std::shared_ptr<viper::Texture> texture = std::make_shared<viper::Texture>();
-    texture->Load("creature.jpg", viper::GetEngine().GetRenderer());
+    auto texture = viper::Resources().Get<viper::Texture>("Textures/blue_01.png", viper::GetEngine().GetRenderer());
+    //std::shared_ptr<viper::Texture> texture = std::make_shared<viper::Texture>();
+    //texture->Load("creature.jpg", viper::GetEngine().GetRenderer());
 
 
 
@@ -76,8 +78,8 @@ int main(int argc, char* argv[]) {
 
     SDL_Event e;
     bool quit = false;
+    float rotate = 0;
 
-    //std::vector<viper::vec2> points;
 
     //Main Loop
     while (!quit) {
@@ -89,22 +91,10 @@ int main(int argc, char* argv[]) {
         }
 
         viper::GetEngine().Update();
-        //scene.Update(viper::GetEngine().GetTime().GetDeltaTime());
 
         game->Update(viper::GetEngine().GetTime().GetDeltaTime());
 
         if (viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_ESCAPE)) quit = true;
-        
-
-        
-      
-        
-        
-
-        //get input 
-       
-
-        
 
         //draw
         viper::vec3 color{ 0, 0, 0 };
@@ -115,15 +105,9 @@ int main(int argc, char* argv[]) {
         viper::GetEngine().Draw();
 
 
-        viper::GetEngine().GetRenderer().DrawTexture(texture.get(), 30, 30);
-
-
-
-
-		//model.Draw(renderer, input.GetMousePosition(), time.GetTime(), 10);
-        
-        
-        //scene.Draw(viper::GetEngine().GetRenderer());
+        //Draw Texture ---------
+        rotate += 90 * viper::GetEngine().GetTime().GetDeltaTime();
+        viper::GetEngine().GetRenderer().DrawTexture(texture.get(), 30, 30, rotate , 4);
 
         //Draw
         //text->Draw(viper::GetEngine().GetRenderer(), 40.0f, 40.0f);

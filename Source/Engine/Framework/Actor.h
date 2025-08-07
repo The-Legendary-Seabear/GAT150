@@ -2,6 +2,7 @@
 #include "Math/Transform.h"
 #include "Renderer/Model.h"
 #include "Scene.h"
+#include "Renderer/Texture.h"
 #include <memory>
 #include <string>
 
@@ -22,9 +23,9 @@ namespace viper {
 		Scene* scene{ nullptr };
 	public:
 		Actor() = default;
-		Actor( const Transform transform, class std::shared_ptr<Model> model) :
+		Actor( const Transform transform, res_t<Texture> texture) :
 			transform{ transform },
-			m_model { model} {}
+			m_texture { texture } {}
 
 		virtual void Update(float dt);
 		virtual void Draw(class Renderer& renderer);
@@ -34,7 +35,8 @@ namespace viper {
 		float GetRadius();
 
 	protected:
-		std::shared_ptr<Model> m_model;
+		res_t<Texture> m_texture;
+		//std::shared_ptr<Model> m_model;
 		
 	};
 }

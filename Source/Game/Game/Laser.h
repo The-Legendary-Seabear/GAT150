@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Actor.h"
+#include "Renderer/Texture.h"
 
 class Laser : public viper::Actor {
 public:
@@ -7,8 +8,8 @@ public:
 
 public:
 	Laser() = default;
-	Laser(const viper::Transform transform, class std::shared_ptr<viper::Model> model) :
-		Actor{ transform, model } {
+	Laser(const viper::Transform transform, viper::res_t<viper::Texture> texture) :
+		Actor{ transform, texture } {
 	}
 
 	void Update(float dt) override;
