@@ -113,7 +113,7 @@ int main(int argc, char* argv[]) {
         //text->Draw(viper::GetEngine().GetRenderer(), 40.0f, 40.0f);
 		game->Draw(viper::GetEngine().GetRenderer());
 
-
+        
         //present
         viper::GetEngine().GetRenderer().Present();
 

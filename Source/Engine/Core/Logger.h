@@ -21,8 +21,7 @@ namespace viper {
 	}
 
 	// need to cast LogLevel a and b to uint8_t to perform & (and) operation, then cast back to LogLevel
-	inline LogLevel operator & (LogLevel a, LogLevel b) { //Exception thrown here
-		std::cout << "Went through this" << std::endl;
+	inline LogLevel operator & (LogLevel a, LogLevel b) { 
 		return (static_cast<LogLevel>(static_cast<uint8_t>(a)), static_cast<LogLevel>(static_cast<uint8_t>(b)));
 		//return (static_cast<LogLevel>(static_cast<uint8_t>(a)) & static_cast<uint8_t>(b));
 	}
