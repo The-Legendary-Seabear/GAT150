@@ -1,15 +1,18 @@
 #pragma once
+#include "Framework/Object.h"
 #include "Math/Transform.h"
 #include "Renderer/Model.h"
 #include "Scene.h"
 #include "Renderer/Texture.h"
+#include "Component.h"
+
 #include <memory>
 #include <string>
 
-namespace viper {
-	class Actor {
+namespace viper{
+	class Component;
+	class Actor : public Object {
 	public:
-		std::string name;
 		std::string tag;
 
 		vec2 velocity{ 0, 0 };
@@ -23,9 +26,9 @@ namespace viper {
 		Scene* scene{ nullptr };
 	public:
 		Actor() = default;
-		Actor( const Transform transform, res_t<Texture> texture) :
-			transform{ transform },
-			m_texture { texture } {}
+		Actor( const Transform transform) :
+			transform{ transform }
+			 {}
 
 		virtual void Update(float dt);
 		virtual void Draw(class Renderer& renderer);
@@ -34,9 +37,12 @@ namespace viper {
 
 		float GetRadius();
 
+		//components
+		void AddComponent(std::unique_ptr<Component> component);
+
 	protected:
-		res_t<Texture> m_texture;
-		//std::shared_ptr<Model> m_model;
+		std::vector<std::unique_ptr<Component>> m_components;
+		
 		
 	};
 }

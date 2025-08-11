@@ -4,8 +4,8 @@
 
 class FireratePowerup : public viper::Actor {
 public:
-	FireratePowerup(const viper::Transform& transform, viper::res_t<viper::Texture> texture)
-		: Actor{ transform, texture } {
+	FireratePowerup(const viper::Transform& transform)
+		: Actor{ transform } {
 		tag = "powerup";
 		name = "fireRatePowerUp";
 	}

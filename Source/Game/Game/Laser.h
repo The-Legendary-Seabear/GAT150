@@ -8,8 +8,8 @@ public:
 
 public:
 	Laser() = default;
-	Laser(const viper::Transform transform, viper::res_t<viper::Texture> texture) :
-		Actor{ transform, texture } {
+	Laser(const viper::Transform transform) :
+		Actor{ transform } {
 	}
 
 	void Update(float dt) override;

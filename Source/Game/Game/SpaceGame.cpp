@@ -1,22 +1,7 @@
 #include "SpaceGame.h"
-#include "Framework/Scene.h"
-#include "Core/Random.h"
-#include "Math/Vector2.h"
-#include "Renderer/Model.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Engine.h"
-#include "Renderer/Renderer.h"
-#include "Input/InputSystem.h"
 #include "GameData.h"
-#include "Renderer/ParticleSystem.h"
-#include "Framework/Actor.h"
-#include "Audio/AudioSystem.h"
-#include "Core/File.h"
-#include "Resources/ResourceManager.h"
-
-#include <vector>
-#include <iostream>
 
 
 bool SpaceGame::Initialize() {
@@ -69,13 +54,18 @@ void SpaceGame::Update(float dt) {
 
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 0.0f, 0.4f, 1.0f });
         viper::Transform transform{ viper::vec2{viper::GetEngine().GetRenderer().GetWidth() * 0.5f, viper::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 3 };
-        auto player = std::make_unique<Player>(transform, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+        auto player = std::make_unique<Player>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
 
         player->speed = 500.0f;
         player->rotationRate = 180.0f;
         player->damping = 1.5f;
         player->tag = "player";
         player->name = "player";
+
+        // components
+        auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
+        spriteRenderer->textureName = "textures/blue_01.png";
+        player->AddComponent(std::move(spriteRenderer));
 
         m_scene->AddActor(std::move(player));
         m_gameState = GameState::Game;
@@ -168,12 +158,18 @@ void SpaceGame::SpawnEnemy() {
         viper::Transform transform{ position, 0, 10 };
 
 
-        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
         enemy->damping = 0.5f;
         enemy->fireTime = 3;
         enemy->fireTimer = 5;
         enemy->speed = (viper::random::getReal() * 200) + 100;
         enemy->tag = "enemy";
+
+        // components
+        auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
+        spriteRenderer->textureName = "textures/blue_01.png";
+        enemy->AddComponent(std::move(spriteRenderer));
+
         m_scene->AddActor(std::move(enemy));
     }
 }

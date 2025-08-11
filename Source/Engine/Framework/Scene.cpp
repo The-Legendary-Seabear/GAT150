@@ -38,7 +38,9 @@ namespace viper {
 
 	void Scene::Draw(class Renderer& renderer) {
 		for (auto& actor : m_actors) {
+			if (actor->active) {
 			actor->Draw(renderer);
+			}
 
 		}
 	}

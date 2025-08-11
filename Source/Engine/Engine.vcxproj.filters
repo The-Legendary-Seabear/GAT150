@@ -74,6 +74,12 @@
     <ClCompile Include="Renderer\Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="EnginePCH.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpriteRenderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
@@ -146,6 +152,24 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Core\Logger.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineMinimal.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePCH.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Object.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Component.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RendererComponent.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteRenderer.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

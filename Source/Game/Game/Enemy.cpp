@@ -1,16 +1,7 @@
 #include "Enemy.h"
-#include "Engine.h"
-#include "Renderer/Renderer.h"
-#include "Framework/Scene.h"
-#include "Framework/Game.h"
 #include "Player.h"
 #include "Rocket.h"
 #include "GameData.h"
-#include "Renderer/Model.h"
-#include "Renderer/ParticleSystem.h"
-#include "Core/Random.h"
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
 #include "FireratePowerup.h"
 
 
@@ -55,7 +46,7 @@ void Enemy::Update(float dt) {
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::enemyDesign, viper::vec3{ 1.0f, 1.0f, 1.0f });
         //spawn rocket at player position and rotation
         viper::Transform transform{ this->transform.position, this->transform.rotation, 2.0f };
-        auto rocket = std::make_unique<Rocket>(transform, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+        auto rocket = std::make_unique<Rocket>(transform);// , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
 
         rocket->speed = 500.0f;
         rocket->lifespan = 1.5f;
@@ -63,6 +54,11 @@ void Enemy::Update(float dt) {
         rocket->name = "rocket";
 
         scene->AddActor(std::move(rocket));
+
+        // components
+        auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
+		spriteRenderer->textureName = "textures/blue_01.png";
+        rocket->AddComponent(std::move(spriteRenderer));
 
     }
     Actor::Update(dt);
@@ -77,7 +73,12 @@ void Enemy::OnCollision(Actor* other) {
         int randNum = viper::random::getInt(0, 100);
         if (randNum < 5) {
             //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::boost, viper::vec3{ 1.0f, 1.0f, 1.0f });
-            FireratePowerup* powerup = new FireratePowerup(viper::Transform{ transform.position, 0.0f, 15.0f } , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+            FireratePowerup* powerup = new FireratePowerup(viper::Transform{ transform.position, 0.0f, 15.0f }); //, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+            // components
+            auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
+            spriteRenderer->textureName = "textures/blue_01.png";
+            powerup->AddComponent(std::move(spriteRenderer));
+
             scene->AddActor(std::unique_ptr<Actor>(powerup));
         }
 

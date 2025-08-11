@@ -1,34 +1,5 @@
 
-#include "Math/Math.h"
-#include "Math/Vector2.h"
-#include "Core/Random.h"
-#include "Core/Time.h"
-#include "Input/InputSystem.h"
-#include "Audio/AudioSystem.h"
-#include "Math/Vector3.h"
-#include "Renderer/Model.h"
-#include "Math/Transform.h"
-#include "Framework/Actor.h"
-#include "Framework/Scene.h"
-#include "Engine.h"
-#include "Renderer/Font.h"
-#include "Renderer/Text.h"
-#include "Core/File.h"
-#include "Resources/ResourceManager.h"
-#include "Renderer/Texture.h"
-#include "Core/Logger.h"
-
-#include "Game/Player.h"
 #include "Game/SpaceGame.h"
-#include "Framework/Game.h"
-
-#include <SDL3/SDL.h>
-#include <iostream>
-#include <Renderer/Renderer.h>
-#include <vector>
-#include <fmod.hpp>
-#include <memory>
-
 
 
 int main(int argc, char* argv[]) {
@@ -46,13 +17,10 @@ int main(int argc, char* argv[]) {
 
     //create objects
 
-	//viper::Scene scene = viper::Scene();
 
     viper::Font* font = new viper::Font();
     font->Load("Archeologicaps.ttf", 20);
 
-    //viper::Text* text = new viper::Text(font);
-    //text->Create(viper::GetEngine().GetRenderer(), "Hello World", viper::vec3{ 1, 1, 1});
 
     viper::GetEngine().GetAudio().Inititalize();
     viper::GetEngine().GetAudio().AddSound("laser_shoot.wav", "laser");
@@ -64,16 +32,6 @@ int main(int argc, char* argv[]) {
    
    //Texture
     auto texture = viper::Resources().Get<viper::Texture>("Textures/blue_01.png", viper::GetEngine().GetRenderer());
-    //std::shared_ptr<viper::Texture> texture = std::make_shared<viper::Texture>();
-    //texture->Load("creature.jpg", viper::GetEngine().GetRenderer());
-
-
-
-    //create stars
-    /*std::vector<viper::vec2> stars;
-    for (int i = 0; i < 100; i++) {
-        stars.push_back(viper::vec2{ viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1280 });
-    }*/
 
 
     SDL_Event e;
@@ -110,7 +68,6 @@ int main(int argc, char* argv[]) {
         viper::GetEngine().GetRenderer().DrawTexture(texture.get(), 30, 30, rotate , 4);
 
         //Draw
-        //text->Draw(viper::GetEngine().GetRenderer(), 40.0f, 40.0f);
 		game->Draw(viper::GetEngine().GetRenderer());
 
         

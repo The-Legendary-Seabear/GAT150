@@ -34,6 +34,9 @@
     <ClCompile Include="Game\Laser.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="GamePCH.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player.h">
@@ -53,5 +56,6 @@
     </ClInclude>
     <ClInclude Include="Game\FireratePowerup.h" />
     <ClInclude Include="Game\Laser.h" />
+    <ClInclude Include="GamePCH.h" />
   </ItemGroup>
 </Project>
