@@ -10,7 +10,7 @@ void Laser::Update(float dt) {
     transform.position.y = viper::math::wrap(transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
 
     float angle = transform.rotation + viper::random::getReal(-60.0f, 60.0f);
-    velocity = viper::vec2{ 1, 0 }.Rotate(viper::math::degToRad(angle)) * speed;
+    //velocity = viper::vec2{ 1, 0 }.Rotate(viper::math::degToRad(angle)) * speed;
 
     Actor::Update(dt);
 }

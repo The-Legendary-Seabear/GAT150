@@ -3,6 +3,7 @@
 #include "Rocket.h"
 #include "SpaceGame.h"
 #include "Laser.h"
+#include "../GamePCH.h"
 
 
 
@@ -40,7 +41,11 @@ void Player::Update(float dt) {
 
     viper::vec2 direction{ 1, 0 };
     viper::vec2 force = direction.Rotate(viper::math::degToRad(transform.rotation)) * thrust * speed;
-	velocity += force * dt;
+	//velocity += force * dt;
+    auto* rb = GetComponent<viper::RigidBody>();
+    if (rb) {
+        rb->velocity += force * dt;
+    }
 
     transform.position.x = viper::math::wrap(transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
     transform.position.y = viper::math::wrap(transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
@@ -69,6 +74,8 @@ void Player::Update(float dt) {
 
     if (canFire) {
         fireTimer = fireTime;
+
+        //viper::GetEngine().GetAudio().PlaySound(*viper::Resources().Get<viper::AudioClip>("laser.wav", viper::GetEngine().GetAudio()).get());
         
         
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 1.0f, 1.0f, 1.0f });
@@ -85,6 +92,13 @@ void Player::Update(float dt) {
         auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
         spriteRenderer->textureName = "textures/rocket.png";
         rocket->AddComponent(std::move(spriteRenderer));
+
+        auto rb = std::make_unique<viper::RigidBody>();
+        rocket->AddComponent(std::move(rb));
+
+        auto collider = std::make_unique<viper::CircleCollider2D>();
+        collider->radius = 10;
+        rocket->AddComponent(std::move(collider));
 
         viper::GetEngine().GetAudio().PlaySound("laser");
 
@@ -111,6 +125,13 @@ void Player::Update(float dt) {
             auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
             spriteRenderer->textureName = "textures/laser.png";
             laser->AddComponent(std::move(spriteRenderer));
+
+            auto rb = std::make_unique<viper::RigidBody>();
+            laser->AddComponent(std::move(rb));
+
+            auto collider = std::make_unique<viper::CircleCollider2D>();
+            collider->radius = 10;
+            laser->AddComponent(std::move(collider));
 
 
             viper::GetEngine().GetAudio().PlaySound("laser");

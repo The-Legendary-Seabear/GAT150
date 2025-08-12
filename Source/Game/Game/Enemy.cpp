@@ -3,6 +3,7 @@
 #include "Rocket.h"
 #include "GameData.h"
 #include "FireratePowerup.h"
+#include "../GamePCH.h"
 
 
 void Enemy::Update(float dt) {
@@ -33,7 +34,12 @@ void Enemy::Update(float dt) {
 
 
     viper::vec2 force = viper::vec2{ 1,0 }.Rotate(viper::math::degToRad(transform.rotation)) * speed;
-    velocity += force * dt;
+    //velocity += force * dt;
+	//GetComponent<viper::RigidBody>()->velocity += force * dt;
+    auto* rb = GetComponent<viper::RigidBody>();
+    if (rb) {
+		rb->velocity += force * dt;
+    }
 
     transform.position.x = viper::math::wrap(transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
     transform.position.y = viper::math::wrap(transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
@@ -59,6 +65,13 @@ void Enemy::Update(float dt) {
 		spriteRenderer->textureName = "textures/rocket.png";
         rocket->AddComponent(std::move(spriteRenderer));
 
+        auto rb = std::make_unique<viper::RigidBody>();
+        rocket->AddComponent(std::move(rb));
+
+        auto collider = std::make_unique<viper::CircleCollider2D>();
+        collider->radius = 10;
+        rocket->AddComponent(std::move(collider));
+
         scene->AddActor(std::move(rocket));
     }
     Actor::Update(dt);
@@ -78,6 +91,13 @@ void Enemy::OnCollision(Actor* other) {
             auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
             spriteRenderer->textureName = "textures/powerup.png";
             powerup->AddComponent(std::move(spriteRenderer));
+
+            auto rb = std::make_unique<viper::RigidBody>();
+            powerup->AddComponent(std::move(rb));
+
+            auto collider = std::make_unique<viper::CircleCollider2D>();
+            collider->radius = 60;
+            powerup->AddComponent(std::move(collider));
 
             scene->AddActor(std::unique_ptr<Actor>(powerup));
         }

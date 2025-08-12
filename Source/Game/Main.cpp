@@ -21,12 +21,13 @@ int main(int argc, char* argv[]) {
     viper::Font* font = new viper::Font();
     font->Load("Archeologicaps.ttf", 20);
 
-
+    /*
     viper::GetEngine().GetAudio().Inititalize();
     viper::GetEngine().GetAudio().AddSound("laser_shoot.wav", "laser");
     viper::GetEngine().GetAudio().AddBackGroundMusic("tetris.wav", "tetris");
     viper::GetEngine().GetAudio().AddBackGroundMusic("main_menu.wav", "main_menu");
     viper::GetEngine().GetAudio().AddBackGroundMusic("game_over.wav", "game_over");
+    */
 
     FMOD::Sound* sound = nullptr;
     
