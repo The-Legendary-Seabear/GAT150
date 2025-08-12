@@ -53,13 +53,13 @@ void Enemy::Update(float dt) {
         rocket->tag = "enemy";
         rocket->name = "rocket";
 
-        scene->AddActor(std::move(rocket));
 
         // components
         auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-		spriteRenderer->textureName = "textures/blue_01.png";
+		spriteRenderer->textureName = "textures/rocket.png";
         rocket->AddComponent(std::move(spriteRenderer));
 
+        scene->AddActor(std::move(rocket));
     }
     Actor::Update(dt);
 }
@@ -76,7 +76,7 @@ void Enemy::OnCollision(Actor* other) {
             FireratePowerup* powerup = new FireratePowerup(viper::Transform{ transform.position, 0.0f, 15.0f }); //, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
             // components
             auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-            spriteRenderer->textureName = "textures/blue_01.png";
+            spriteRenderer->textureName = "textures/powerup.png";
             powerup->AddComponent(std::move(spriteRenderer));
 
             scene->AddActor(std::unique_ptr<Actor>(powerup));

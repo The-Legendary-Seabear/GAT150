@@ -83,7 +83,7 @@ void Player::Update(float dt) {
 
         // components
         auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-        spriteRenderer->textureName = "textures/blue_01.png";
+        spriteRenderer->textureName = "textures/rocket.png";
         rocket->AddComponent(std::move(spriteRenderer));
 
         viper::GetEngine().GetAudio().PlaySound("laser");
@@ -109,7 +109,7 @@ void Player::Update(float dt) {
 
             // components
             auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-            spriteRenderer->textureName = "textures/blue_01.png";
+            spriteRenderer->textureName = "textures/laser.png";
             laser->AddComponent(std::move(spriteRenderer));
 
 

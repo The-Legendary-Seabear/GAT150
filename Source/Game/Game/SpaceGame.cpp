@@ -33,17 +33,24 @@ void SpaceGame::Update(float dt) {
         m_gameState = GameState::Title;
         break;
     case SpaceGame::GameState::Title:
+        if (!m_backgroundMusicStarted) {
+            viper::GetEngine().GetAudio().PlaySound("main_menu");
+            m_backgroundMusicStarted = true;
+        }
         if (viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
+			m_backgroundMusicStarted = false;
             m_gameState = GameState::StartGame;
         }
         break;
     case SpaceGame::GameState::StartGame:
+		viper::GetEngine().GetAudio().StopSound();
         m_score = 0;
         m_lives = 3;
         m_gameState = GameState::StartRound;
         break;
     case SpaceGame::GameState::StartRound: {
         m_scene->RemoveAllActors();
+
 
 
         if (!m_backgroundMusicStarted) {
@@ -57,14 +64,14 @@ void SpaceGame::Update(float dt) {
         auto player = std::make_unique<Player>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
 
         player->speed = 500.0f;
-        player->rotationRate = 180.0f;
+        player->rotationRate = 200.0f;
         player->damping = 1.5f;
         player->tag = "player";
         player->name = "player";
 
         // components
         auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-        spriteRenderer->textureName = "textures/blue_01.png";
+        spriteRenderer->textureName = "textures/player.png";
         player->AddComponent(std::move(spriteRenderer));
 
         m_scene->AddActor(std::move(player));
@@ -88,6 +95,10 @@ void SpaceGame::Update(float dt) {
         if (m_stateTimer <= 0) {
         m_lives--;
         if (m_lives == 0) { 
+            m_scene->RemoveAllActors();
+        viper::GetEngine().GetAudio().StopSound();
+        m_backgroundMusicStarted = false;
+		viper::GetEngine().GetAudio().PlaySound("game_over");
             m_gameState = GameState::GameOver; 
 			m_stateTimer = 3;
         }
@@ -96,8 +107,8 @@ void SpaceGame::Update(float dt) {
         break;
     case SpaceGame::GameState::GameOver:
         m_stateTimer -= dt;
-        viper::GetEngine().GetAudio().StopSound();
         if (m_stateTimer <= 0) {
+			viper::GetEngine().GetAudio().StopSound();
         m_gameState = GameState::Title;
         m_stateTimer = 3;
         }
@@ -155,19 +166,19 @@ void SpaceGame::SpawnEnemy() {
 
 
         viper::vec2 position = player->transform.position + viper::random::OnUnitCircle() * viper::random::getReal(200.0f, 500.0f);
-        viper::Transform transform{ position, 0, 10 };
+        viper::Transform transform{ position, 0, 5 };
 
 
         std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
         enemy->damping = 0.5f;
         enemy->fireTime = 3;
-        enemy->fireTimer = 5;
+        enemy->fireTimer = 1;
         enemy->speed = (viper::random::getReal() * 200) + 100;
         enemy->tag = "enemy";
 
         // components
         auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-        spriteRenderer->textureName = "textures/blue_01.png";
+        spriteRenderer->textureName = "textures/enemy.png";
         enemy->AddComponent(std::move(spriteRenderer));
 
         m_scene->AddActor(std::move(enemy));
