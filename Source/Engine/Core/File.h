@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-namespace viper {
+namespace viper::file {
     std::string GetCurrentDirectory();
     bool SetCurrentDirectory(const std::string& path);
     std::string GetExtension(const std::string& path);

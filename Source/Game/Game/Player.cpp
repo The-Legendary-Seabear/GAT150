@@ -75,8 +75,12 @@ void Player::Update(float dt) {
     if (canFire) {
         fireTimer = fireTime;
 
-        //viper::GetEngine().GetAudio().PlaySound(*viper::Resources().Get<viper::AudioClip>("laser.wav", viper::GetEngine().GetAudio()).get());
-        
+
+        auto sound = viper::GetEngine().GetAudio().PlaySound(*viper::Resources().Get<viper::AudioClip>("laser.wav", viper::GetEngine().GetAudio()).get());
+        if (sound) {
+
+        //viper::GetEngine().GetAudio().PlaySound(*sound);
+        }
         
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 1.0f, 1.0f, 1.0f });
         //spawn rocket at player position and rotation
@@ -100,7 +104,7 @@ void Player::Update(float dt) {
         collider->radius = 10;
         rocket->AddComponent(std::move(collider));
 
-        viper::GetEngine().GetAudio().PlaySound("laser");
+        //viper::GetEngine().GetAudio().PlaySound("laser");
 
         
 

@@ -124,15 +124,15 @@ namespace viper {
 		FMOD::Channel* channel = nullptr;
 
 		//play cound from key
-		FMOD_RESULT result = m_system->playSound(m_sounds[key], 0, false, nullptr);
+		//FMOD_RESULT result = m_system->playSound(m_sounds[key], 0, false, nullptr);
 
 		m_channels[key] = channel;
 		
 		return true;
 	}
 	bool AudioSystem::PlaySound(AudioClip& audioClip) {
-		FMOD_RESULT result = m_system->playSound(audioClip.m_sound, 0, false, nullptr);
-		if (!CheckFMODResult(result)) return false;
+		//FMOD_RESULT result = m_system->playSound(audioClip.m_sound, 0, false, nullptr);
+		//if (!CheckFMODResult(result)) return false;
 		return true;
 	}
 	bool AudioSystem::StopSound() {

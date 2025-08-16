@@ -44,7 +44,7 @@
     <ClCompile Include="Core\StringHelper.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Model.cpp">
+    <ClCompile Include="Renderer\Mesh.cpp">
       <Filter>Source\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Scene.cpp">
@@ -89,6 +89,15 @@
     <ClCompile Include="Audio\AudioClip.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Components\MeshRenderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AudioSource.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Json.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
@@ -121,7 +130,7 @@
     <ClInclude Include="Core\StringHelper.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Model.h">
+    <ClInclude Include="Renderer\Mesh.h">
       <Filter>Source\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Math\Transform.h">
@@ -191,6 +200,15 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Audio\AudioClip.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\MeshRenderer.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AudioSource.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Json.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

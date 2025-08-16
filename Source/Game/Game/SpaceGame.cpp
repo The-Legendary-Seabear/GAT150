@@ -187,9 +187,12 @@ void SpaceGame::SpawnEnemy() {
         enemy->tag = "enemy";
 
         // components
-        auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
-        spriteRenderer->textureName = "textures/enemy.png";
-        enemy->AddComponent(std::move(spriteRenderer));
+        //auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
+        //spriteRenderer->textureName = "textures/enemy.png";
+        //enemy->AddComponent(std::move(spriteRenderer));
+        auto meshRenderer = std::make_unique<viper::MeshRenderer>();
+        meshRenderer->meshName = "meshes/enemy.txt";
+		enemy->AddComponent(std::move(meshRenderer));
 
         auto rb = std::make_unique<viper::RigidBody>();
         rb->damping = 1.5f;

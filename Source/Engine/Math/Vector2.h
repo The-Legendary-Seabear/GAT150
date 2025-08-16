@@ -1,4 +1,5 @@
 #pragma once
+#include "../EnginePCH.h"
 #include "Math.h"
 #include <cassert>
 
@@ -106,6 +107,44 @@ namespace viper {
 			return v.Angle();
 		}
 	};
+
+	template<typename T>
+	std::ostream& operator <<(std::ostream& stream, const Vector2<T>& v) {
+		stream << "{" << v.x << ", " << v.y << "}";
+		return stream;
+	}
+
+	template<typename T>
+	std::istream& operator >>(std::istream& stream, Vector2<T>& v) {
+		char ch = '\0';
+		// {
+		if (!(stream >> std::ws >> ch) || ch != '{') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		// x
+		if (!(stream >> std::ws >> v.x)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		// ,
+		if (!(stream >> std::ws >> ch) || ch != ',') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		// y
+		if (!(stream >> std::ws >> v.y)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		// }
+		if (!(stream >> std::ws >> ch) || ch != '}') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		
+		return stream;
+	}
 
 	using ivec2 = Vector2<int>;
 	using vec2 = Vector2<float>;

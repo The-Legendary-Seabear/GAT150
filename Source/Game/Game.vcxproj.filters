@@ -58,4 +58,7 @@
     <ClInclude Include="Game\Laser.h" />
     <ClInclude Include="GamePCH.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Build\Assets\Meshes\enemy.txt" />
+  </ItemGroup>
 </Project>

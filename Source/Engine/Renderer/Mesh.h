@@ -1,4 +1,5 @@
 #pragma once
+#include "Resources/Resource.h"
 #include "../Math/Vector2.h"
 #include "../Math/Vector3.h"
 #include "../Math/Transform.h"
@@ -6,14 +7,16 @@
 #include <vector>
 
 namespace viper {
-	class Model {
+	class Mesh : public Resource{
 	public:
-		Model() = default;
-		Model(const std::vector<vec2> points, const vec3& color) :
+		Mesh() = default;
+		Mesh(const std::vector<vec2> points, const vec3& color) :
 			m_points{ points },
 			m_color{ color } {
 			CalculateRadius();
 		}
+
+		bool Load(const std::string& filename);
 
 		void Draw(class Renderer& renderer, const vec2& position,float rotation , float scale);
 		void Draw(class Renderer& renderer, const Transform& transform);
