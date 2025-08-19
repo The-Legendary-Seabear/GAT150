@@ -1,6 +1,7 @@
 #include "RigidBody.h"
 
 namespace viper {
+	FACTORY_REGISTER(RigidBody)
 
 	void viper::RigidBody::Update(float dt) {
 		owner->transform.position += velocity * dt;

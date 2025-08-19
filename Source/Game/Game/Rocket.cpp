@@ -6,8 +6,12 @@
 #include "Renderer/ParticleSystem.h"
 #include "../GamePCH.h"
 
+FACTORY_REGISTER(Rocket)
+
+
 void Rocket::Update(float dt) {
 
+    /*
     transform.position.x = viper::math::wrap(transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
     transform.position.y = viper::math::wrap(transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
 
@@ -29,10 +33,11 @@ void Rocket::Update(float dt) {
     viper::GetEngine().GetPS().AddParticle(particle);
 
     Actor::Update(dt);
+    */
 }
 
-void Rocket::OnCollision(Actor* other) {
-    if (tag != other->tag) {
-        destroyed = true;
+void Rocket::OnCollision(viper::Actor* other) {
+    if (owner->tag != other->tag) {
+        owner->destroyed = true;
     }
 }

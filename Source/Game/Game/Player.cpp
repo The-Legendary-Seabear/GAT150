@@ -5,12 +5,13 @@
 #include "Laser.h"
 #include "../GamePCH.h"
 
+FACTORY_REGISTER(Player)
 
 
 void Player::Update(float dt) {
   
 
-
+    /*
     float rotate = 0;
     if (viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) { 
         CreateParticle();
@@ -146,20 +147,21 @@ void Player::Update(float dt) {
     }
     
     Actor::Update(dt);
+    */
 
    
 }
 
-void Player::OnCollision(Actor* other) {
-    if (tag != other->tag && other->tag != "powerup") {
-        destroyed = true;
-        dynamic_cast<SpaceGame*>(scene->GetGame())->OnPlayerDeath();
+void Player::OnCollision(viper::Actor* other) {
+    if (owner->tag != other->tag && other->tag != "powerup") {
+        owner->destroyed = true;
+        dynamic_cast<SpaceGame*>(owner->scene->GetGame())->OnPlayerDeath();
     }
 }
 
 void Player::CreateParticle() {
     viper::Particle particle;
-    particle.position = transform.position;
+    particle.position = owner->transform.position;
     particle.velocity = viper::vec2{ viper::random::getReal(-200.0f , 200.0f), viper::random::getReal(-200.0f , 200.0f) };
     particle.color = { 1, 1, 1 };
     particle.lifespan = 2;

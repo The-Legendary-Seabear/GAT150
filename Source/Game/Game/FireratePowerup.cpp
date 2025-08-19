@@ -5,12 +5,12 @@
 
 
 void FireratePowerup::Update(float dt) {
-	Actor::Update(dt);
+	//Actor::Update(dt);
 }
 
-void FireratePowerup::OnCollision(Actor* other) {
+void FireratePowerup::OnCollision(viper::Actor* other) {
     if (Player* player = dynamic_cast<Player*>(other)) {
         player->fireRateBoostActive = true;
-        destroyed = true; 
+        owner->destroyed = true; 
     }
 }

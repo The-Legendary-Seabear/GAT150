@@ -59,7 +59,7 @@ void SpaceGame::Update(float dt) {
             //m_backgroundMusicStarted = true;
         }
 
-
+        /*
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 0.0f, 0.4f, 1.0f });
         viper::Transform transform{ viper::vec2{viper::GetEngine().GetRenderer().GetWidth() * 0.5f, viper::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 3 };
         auto player = std::make_unique<Player>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
@@ -84,6 +84,7 @@ void SpaceGame::Update(float dt) {
 		player->AddComponent(std::move(collider));
 
         m_scene->AddActor(std::move(player));
+        */
 
         m_gameState = GameState::Game;
     }
@@ -169,7 +170,7 @@ void SpaceGame::OnPlayerDeath() {
 }
 
 void SpaceGame::SpawnEnemy() {
-
+    /*
     viper::Actor* player = m_scene->GetActorByName<viper::Actor>("player");
     if (player) {
         //std::shared_ptr<viper::Model> enemyModel = std::make_shared<viper::Model>(GameData::enemyDesign, viper::vec3{ 1, 1, 1 });
@@ -204,5 +205,6 @@ void SpaceGame::SpawnEnemy() {
 
         m_scene->AddActor(std::move(enemy));
     }
+    */
 }
 

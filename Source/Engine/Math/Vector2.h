@@ -2,6 +2,7 @@
 #include "../EnginePCH.h"
 #include "Math.h"
 #include <cassert>
+#include <iostream>
 
 namespace viper {
 	template<typename T>

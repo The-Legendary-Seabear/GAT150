@@ -15,6 +15,7 @@ namespace viper {
 		void Clear() { m_resources.clear(); }
 
 		template<typename T, typename ... TArgs>
+			requires std::derived_from<T, Resource>
 		res_t<T> Get(const std::string& name, TArgs&& ... args);
 
 		template<typename T, typename ... TArgs>
@@ -33,6 +34,7 @@ namespace viper {
 
 
 	template<typename T, typename ... TArgs>
+		requires std::derived_from<T, Resource>
 	inline res_t<T> ResourceManager::Get(const std::string& name, TArgs&& ... args) {
 		return GetWithID<T>(name, name, std::forward<TArgs>(args)...);
 	}

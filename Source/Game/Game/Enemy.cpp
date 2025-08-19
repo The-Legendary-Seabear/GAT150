@@ -1,3 +1,4 @@
+#include "../GamePCH.h"
 #include "Enemy.h"
 #include "Player.h"
 #include "Rocket.h"
@@ -5,18 +6,20 @@
 #include "FireratePowerup.h"
 #include "../GamePCH.h"
 
+FACTORY_REGISTER(Enemy)
+
 
 void Enemy::Update(float dt) {
-
+    /*
     bool playerSeen = false;
 
-    Player* player = scene->GetActorByName<Player>("player");
+    Actor* player = owner->scene->GetActorByName<Actor>("player");
     if (player) {
         viper::vec2 direction{ 0, 0 };
-        direction = player->transform.position - transform.position;
+        direction = player->transform.position - owner->transform.position;
 
         direction = direction.Normalized();
-        viper::vec2 forward = viper::vec2{ 1, 0 }.Rotate(viper::math::degToRad(transform.rotation));
+        viper::vec2 forward = viper::vec2{ 1, 0 }.Rotate(viper::math::degToRad(owner->transform.rotation));
 
         float angle = viper::math::radToDeg(viper::vec2::AngleBetween(forward, direction));
         playerSeen = angle <= 180;
@@ -24,7 +27,7 @@ void Enemy::Update(float dt) {
         if (playerSeen) {
         float angle = viper::vec2::SignedAngleBetween(forward, direction);
         angle = viper::math::sign(angle);
-        transform.rotation += viper::math::radToDeg(angle * 5 * dt);
+        owner->transform.rotation += viper::math::radToDeg(angle * 5 * dt);
         
         }
 
@@ -33,16 +36,16 @@ void Enemy::Update(float dt) {
     }
 
 
-    viper::vec2 force = viper::vec2{ 1,0 }.Rotate(viper::math::degToRad(transform.rotation)) * speed;
+    viper::vec2 force = viper::vec2{ 1,0 }.Rotate(viper::math::degToRad(owner->transform.rotation)) * speed;
     //velocity += force * dt;
 	//GetComponent<viper::RigidBody>()->velocity += force * dt;
-    auto* rb = GetComponent<viper::RigidBody>();
+    auto* rb = owner->GetComponent<viper::RigidBody>();
     if (rb) {
 		rb->velocity += force * dt;
     }
 
-    transform.position.x = viper::math::wrap(transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
-    transform.position.y = viper::math::wrap(transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
+    owner->transform.position.x = viper::math::wrap(owner->transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
+    owner->transform.position.y = viper::math::wrap(owner->transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
 
 
     fireTimer -= dt;
@@ -51,9 +54,9 @@ void Enemy::Update(float dt) {
 
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::enemyDesign, viper::vec3{ 1.0f, 1.0f, 1.0f });
         //spawn rocket at player position and rotation
-        viper::Transform transform{ this->transform.position, this->transform.rotation, 2.0f };
-        auto rocket = std::make_unique<Rocket>(transform);// , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
-
+        viper::Transform transform{ owner->transform.position, owner->transform.rotation, 2.0f };
+        auto rocket = std::make_unique<Actor>(transform);// , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+        
         rocket->speed = 500.0f;
         rocket->lifespan = 1.5f;
         rocket->tag = "enemy";
@@ -75,18 +78,19 @@ void Enemy::Update(float dt) {
         scene->AddActor(std::move(rocket));
     }
     Actor::Update(dt);
+    */
 }
 
-void Enemy::OnCollision(Actor* other) {
-    if (tag != other->tag && other->tag != "powerup") {
-        destroyed = true;
-        scene->GetGame()->AddPoints(100);
+void Enemy::OnCollision(viper::Actor* other) {
+    if (owner->tag != other->tag && other->tag != "powerup") {
+        owner->destroyed = true;
+        owner->scene->GetGame()->AddPoints(100);
 
-
+        /*
         int randNum = viper::random::getInt(0, 100);
         if (randNum < 5) {
             //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::boost, viper::vec3{ 1.0f, 1.0f, 1.0f });
-            FireratePowerup* powerup = new FireratePowerup(viper::Transform{ transform.position, 0.0f, 15.0f }); //, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+            FireratePowerup* powerup = new FireratePowerup(viper::Transform{ owner->transform.position, 0.0f, 15.0f }); //, viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
             // components
             auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
             spriteRenderer->textureName = "textures/powerup.png";
@@ -99,13 +103,14 @@ void Enemy::OnCollision(Actor* other) {
             collider->radius = 60;
             powerup->AddComponent(std::move(collider));
 
-            scene->AddActor(std::unique_ptr<Actor>(powerup));
+            owner->scene->AddActor(std::unique_ptr<viper::Actor>(powerup));
         }
+        */
 
 
         for (int i = 0; i < 100; i++) {
             viper::Particle particle;
-            particle.position = transform.position;
+            particle.position = owner->transform.position;
             particle.velocity = viper::random::OnUnitCircle() * viper::random::getReal(10.0f, 200.0f);
             particle.color = { 1, 1, 1 };
             particle.lifespan = 2;

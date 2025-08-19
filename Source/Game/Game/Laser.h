@@ -2,19 +2,16 @@
 #include "Framework/Actor.h"
 #include "Renderer/Texture.h"
 
-class Laser : public viper::Actor {
+class Laser : public viper::Component {
 public:
 	float speed = 20.0f;
 
 public:
 	Laser() = default;
-	Laser(const viper::Transform transform) :
-		Actor{ transform } {
-	}
 
 	void Update(float dt) override;
 
-	void OnCollision(Actor* other) override;
+	void OnCollision(class viper::Actor* other);
 private:
 
 };
