@@ -61,4 +61,7 @@
   <ItemGroup>
     <Text Include="..\..\Build\Assets\Meshes\enemy.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Build\Assets\scene.json" />
+  </ItemGroup>
 </Project>

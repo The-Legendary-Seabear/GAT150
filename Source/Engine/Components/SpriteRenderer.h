@@ -12,6 +12,10 @@ namespace viper {
 
 		void Draw(Renderer& renderer) override;
 
+
+		// Inherited via Serializeable
+		void Read(const json::value_t& value) override;
+
 	};
 }
 

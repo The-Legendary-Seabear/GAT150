@@ -8,6 +8,10 @@
 bool SpaceGame::Initialize() {
     m_scene = std::make_unique<viper::Scene>(this);
 
+
+    viper::json::document_t document;
+    viper::json::Load("scene.json", document);
+    m_scene->Read(document);
 	
     /*
     m_titleFont = std::make_shared<viper::Font>();

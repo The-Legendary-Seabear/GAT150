@@ -81,11 +81,12 @@ void Enemy::Update(float dt) {
     */
 }
 
+
 void Enemy::OnCollision(viper::Actor* other) {
     if (owner->tag != other->tag && other->tag != "powerup") {
         owner->destroyed = true;
         owner->scene->GetGame()->AddPoints(100);
-
+        
         /*
         int randNum = viper::random::getInt(0, 100);
         if (randNum < 5) {
@@ -104,6 +105,7 @@ void Enemy::OnCollision(viper::Actor* other) {
             powerup->AddComponent(std::move(collider));
 
             owner->scene->AddActor(std::unique_ptr<viper::Actor>(powerup));
+            
         }
         */
 

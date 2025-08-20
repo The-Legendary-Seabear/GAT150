@@ -31,7 +31,7 @@ namespace viper{
 		virtual void Update(float dt);
 		virtual void Draw(class Renderer& renderer);
 
-		virtual void OnCollision(Actor* other) = 0;
+		virtual void OnCollision(Actor* other) {}
 
 		
 
@@ -44,10 +44,14 @@ namespace viper{
 		template<typename T>
 		std::vector<T*> GetComponents();
 
+		void Read(const json::value_t& value) override;
 	protected:
 		std::vector<std::unique_ptr<Component>> m_components;
 		
 		
+
+		// Inherited via Serializeable
+
 	};
 
 	template<typename T>

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Core/Serializable.h"
 #include"Core/StringHelper.h"
 
 #include <string>
@@ -11,9 +11,11 @@ namespace viper {
 	class Actor;
 	class Game;
 
-	class Scene {
+	class Scene : public Serializeable {
 	public:
 		Scene(Game* game) : m_game{ game } {}
+
+		void Read(const json::value_t& value) override;
 
 		void Update(float dt);
 		void Draw(class Renderer& renderer);
@@ -33,6 +35,8 @@ namespace viper {
 		Game* m_game{ nullptr };
 
 		std::list<std::unique_ptr<Actor>> m_actors;
+
+		
 	};
 
 	template<typename T>
