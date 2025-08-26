@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Serializable.h"
 #include"Core/StringHelper.h"
-
+#include "EnginePCH.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -11,17 +11,18 @@ namespace viper {
 	class Actor;
 	class Game;
 
-	class Scene : public Serializeable {
+	class Scene : public ISerializeable {
 	public:
 		Scene(Game* game) : m_game{ game } {}
 
-		void Read(const json::value_t& value) override;
+		bool Load(const std::string& sceneName);
+		void Read(const json::value_t& value);
 
 		void Update(float dt);
 		void Draw(class Renderer& renderer);
 
-		void AddActor(std::unique_ptr<Actor> actor);
-		void RemoveAllActors();
+		void AddActor(std::unique_ptr<Actor> actor, bool start = true);
+		void RemoveAllActors(bool force = false);
 
 		template <typename T = Actor>
 		T* GetActorByName(const std::string& name);

@@ -3,7 +3,7 @@
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
 
-class SpaceGame : public viper::Game {
+class SpaceGame : public viper::Game, public viper::IObserver {
 public:
 	enum class GameState {
 		Initialize,
@@ -24,6 +24,7 @@ public:
 	void Shutdown() override;
 	void Draw(class viper::Renderer& renderer) override;
 
+	void OnNotify(const viper::Event& event) override;
 	void OnPlayerDeath();
 
 private:
@@ -42,4 +43,6 @@ private:
 	std::unique_ptr< class viper::Text> m_livesText;
 
 	bool m_backgroundMusicStarted = false;
+
+	
 };

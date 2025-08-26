@@ -22,9 +22,17 @@
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 
+//physics
+#include "Physics/Collidable.h"
+
 //Resources
 #include "Resources/Resource.h"
 #include "Resources/ResourceManager.h"
+
+//event manager
+#include "Event/Event.h"
+#include "Event/EventManager.h"
+#include "Event/Observer.h"
 
 // third-party libraries
 #include <SDL3/SDL.h>

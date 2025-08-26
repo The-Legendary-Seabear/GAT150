@@ -12,14 +12,19 @@ namespace viper {
 		}
 
 		//remove destroyed actors
-		for (auto iter = m_actors.begin(); iter != m_actors.end();) {
-			if ((*iter)->destroyed) {
-				iter = m_actors.erase(iter);
-			}
-			else {
-				iter++;
-			}
-		}
+		std::erase_if(m_actors, [](auto& actor) {
+			return (actor->destroyed);
+		});
+		//for (auto iter = m_actors.begin(); iter != m_actors.end();) {
+		//	if ((*iter)->destroyed) {
+		//		iter = m_actors.erase(iter);
+		//	}
+		//	else {
+		//		iter++;
+		//	}
+		//}
+
+
 	//check for collisions
 	for (auto& actorA : m_actors) {
 		for (auto& actorB : m_actors) {
@@ -42,7 +47,7 @@ namespace viper {
 	}
 
 
-	void Scene::Draw(class Renderer& renderer) {
+	void Scene::Draw(Renderer& renderer) {
 		for (auto& actor : m_actors) {
 			if (actor->active) {
 			actor->Draw(renderer);
@@ -51,25 +56,69 @@ namespace viper {
 		}
 	}
 
-	void Scene::AddActor(std::unique_ptr<class Actor> actor) {
+	void Scene::AddActor(std::unique_ptr<Actor> actor, bool start) {
 		actor->scene = this;
+		if (start) actor->Start();
 		m_actors.push_back(std::move(actor));
 	}
 
-	void Scene::RemoveAllActors() {
-		m_actors.clear();
+	void Scene::RemoveAllActors(bool force) {
+		for (auto iter = m_actors.begin(); iter != m_actors.end();) {
+			if (!(*iter)->persistent || force) {
+				iter = m_actors.erase(iter);
+			}
+			else {
+				iter++;
+			}
+		}
+	}
+
+	bool Scene::Load(const std::string& sceneName) {
+		//load json
+		viper::json::document_t document;
+		if (viper::json::Load(sceneName, document) == false) {
+			Logger::Error("Could not load scene {}", sceneName);
+			return false;
+		}
+		//create scene
+		Read(document);
+		//start actors
+		for (auto& actor : m_actors) {
+			actor->Start();
+		}
+		return true;
 	}
 
 	void Scene::Read(const json::value_t& value) {
-		for (auto& actorValue : value["actors"].GetArray()) {
+		//read prototypes
+		if (JSON_HAS(value, prototypes)) {
+		for (auto& actorValue : JSON_GET(value, prototypes).GetArray()) {
+
 			auto actor = Factory::Instance().Create<Actor>("Actor");
+
 			actor->Read(actorValue);
 
-			AddActor(std::move(actor));
+			std::string name = actor->name;
+			Factory::Instance().RegisterPrototype<Actor>(name, std::move(actor));
 		}
+		}
+
+		//read actor
+		if (JSON_HAS(value, actors)) {
+			for (auto& actorValue : JSON_GET(value, actors).GetArray()) {
+
+				auto actor = Factory::Instance().Create<Actor>("Actor");
+
+				actor->Read(actorValue);
+
+				AddActor(std::move(actor), false);
+			}
+		}
+
 	}
 	
 
 
 		
 }
+

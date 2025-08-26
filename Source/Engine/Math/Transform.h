@@ -3,7 +3,8 @@
 #include "Core/Serializable.h"
 
 namespace viper {
-	struct Transform : public Serializeable {
+	struct Transform : public ISerializeable {
+	
 		vec2 position{ 0, 0 };
 		float rotation = 0;
 		float scale = 1;
@@ -15,6 +16,6 @@ namespace viper {
 			scale{ scale } {}
 
 		// Inherited via Serializeable
-		void Read(const json::value_t& value) override;
+		void Read(const json::value_t& value);
 	};
 }

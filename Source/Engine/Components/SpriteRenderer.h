@@ -6,8 +6,9 @@ namespace viper {
 	public:
 		std::string textureName;
 
-
+		res_t<Texture> texture;
 	public:
+		void Start() override;
 		void Update(float dt) override;
 
 		void Draw(Renderer& renderer) override;
@@ -15,6 +16,8 @@ namespace viper {
 
 		// Inherited via Serializeable
 		void Read(const json::value_t& value) override;
+
+		CLASS_PROTOTYPE(SpriteRenderer)
 
 	};
 }

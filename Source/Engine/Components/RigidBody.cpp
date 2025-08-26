@@ -3,9 +3,16 @@
 namespace viper {
 	FACTORY_REGISTER(RigidBody)
 
-	void viper::RigidBody::Update(float dt) {
+	void RigidBody::Update(float dt) {
 		owner->transform.position += velocity * dt;
 		velocity *= (1.0f / (1.0f + damping * dt)); // ( < 1) = slow down, 1/1.1 = < 1
+	}
+
+	void RigidBody::Read(const json::value_t& value) {
+		Object::Read(value);
+
+		JSON_READ(value, damping);
+		JSON_READ(value, velocity);
 	}
 
 }

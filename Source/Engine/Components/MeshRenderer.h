@@ -12,5 +12,6 @@ namespace viper {
 
 		void Draw(Renderer& renderer) override;
 
+		CLASS_PROTOTYPE(MeshRenderer)
 	};
 }

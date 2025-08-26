@@ -11,5 +11,9 @@ namespace viper{
 
 		bool CheckCollision(ColliderComponent& other) override;
 
+		CLASS_PROTOTYPE(CircleCollider2D)
+
+		void Read(const json::value_t& value) override;
+
 	};
 }

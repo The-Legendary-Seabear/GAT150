@@ -7,11 +7,9 @@
 
 FACTORY_REGISTER(Player)
 
-
 void Player::Update(float dt) {
   
 
-    /*
     float rotate = 0;
     if (viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) { 
         CreateParticle();
@@ -21,7 +19,7 @@ void Player::Update(float dt) {
         CreateParticle();
         rotate += 1; }
 
-    transform.rotation += (rotate * rotationRate) * dt;
+    owner->transform.rotation += (rotate * rotationRate) * dt;
 
     //thrust
     float thrust = 0;
@@ -41,16 +39,15 @@ void Player::Update(float dt) {
 
 
     viper::vec2 direction{ 1, 0 };
-    viper::vec2 force = direction.Rotate(viper::math::degToRad(transform.rotation)) * thrust * speed;
+    viper::vec2 force = direction.Rotate(viper::math::degToRad(owner->transform.rotation)) * thrust * speed;
 	//velocity += force * dt;
-    auto* rb = GetComponent<viper::RigidBody>();
+    auto* rb = owner->GetComponent<viper::RigidBody>();
     if (rb) {
         rb->velocity += force * dt;
     }
 
-    transform.position.x = viper::math::wrap(transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
-    transform.position.y = viper::math::wrap(transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
-
+    owner->transform.position.x = viper::math::wrap(owner->transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
+    owner->transform.position.y = viper::math::wrap(owner->transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetHeight());
 
     //check fire key pressed
     laserTimer -= dt;
@@ -65,6 +62,7 @@ void Player::Update(float dt) {
     }
 
     
+    
 
     if (fireRateBoostActive) {
         canFire = viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_SPACE);
@@ -76,22 +74,24 @@ void Player::Update(float dt) {
     if (canFire) {
         fireTimer = fireTime;
 
-
+        /*
         auto sound = viper::GetEngine().GetAudio().PlaySound(*viper::Resources().Get<viper::AudioClip>("laser.wav", viper::GetEngine().GetAudio()).get());
         if (sound) {
 
         //viper::GetEngine().GetAudio().PlaySound(*sound);
         }
+        */
         
         //std::shared_ptr<viper::Model> model = std::make_shared <viper::Model>(GameData::points, viper::vec3{ 1.0f, 1.0f, 1.0f });
         //spawn rocket at player position and rotation
-        viper::Transform transform{ this->transform.position, this->transform.rotation, 2.0f };
-        auto rocket = std::make_unique<Rocket>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+        viper::Transform transform{ this->owner->transform.position, this->owner->transform.rotation, 2.0f };
+        //auto rocket = std::make_unique<viper::Actor>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
+		auto rocket = viper::Instantiate("rocket", transform);
 
-        rocket->speed = 500.0f;
-        rocket->lifespan = 1.5f;
+        //rocket->speed = 500.0f;
+        //rocket->lifespan = 1.5f;
         rocket->tag = "player";
-        rocket->name = "rocket";
+        //rocket->name = "rocket";
 
         // components
         auto spriteRenderer = std::make_unique<viper::SpriteRenderer>();
@@ -109,9 +109,10 @@ void Player::Update(float dt) {
 
         
 
-        scene->AddActor(std::move(rocket));
+        owner->scene->AddActor(std::move(rocket));
     }
 
+    /*
     if (viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_E) && laserTimer <= 0) {
         laserTimer = laserTime;
        
@@ -151,12 +152,25 @@ void Player::Update(float dt) {
 
    
 }
+    
 
 void Player::OnCollision(viper::Actor* other) {
     if (owner->tag != other->tag && other->tag != "powerup") {
         owner->destroyed = true;
-        dynamic_cast<SpaceGame*>(owner->scene->GetGame())->OnPlayerDeath();
+
+		EVENT_NOTIFY("player_dead", true);
+        
+
+        //dynamic_cast<SpaceGame*>(owner->scene->GetGame())->OnPlayerDeath();
     }
+}
+
+void Player::Read(const viper::json::value_t& value) {
+    Object::Read(value);
+
+    JSON_READ(value, speed);
+    JSON_READ(value, rotationRate);
+    JSON_READ(value, fireTime);
 }
 
 void Player::CreateParticle() {

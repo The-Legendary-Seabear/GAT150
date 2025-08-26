@@ -104,6 +104,15 @@
     <ClCompile Include="Framework\Object.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Observer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Physics.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
@@ -221,6 +230,21 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Core\Serializable.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collidable.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Physics.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Observer.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

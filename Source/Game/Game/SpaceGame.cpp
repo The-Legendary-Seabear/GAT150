@@ -5,13 +5,17 @@
 #include "GameData.h"
 
 
+
 bool SpaceGame::Initialize() {
+
+	OBSERVER_ADD(player_dead);
+    OBSERVER_ADD(add_points);
+    
+
     m_scene = std::make_unique<viper::Scene>(this);
 
-
-    viper::json::document_t document;
-    viper::json::Load("scene.json", document);
-    m_scene->Read(document);
+    m_scene->Load("scene.json");
+    
 	
     /*
     m_titleFont = std::make_shared<viper::Font>();
@@ -56,6 +60,9 @@ void SpaceGame::Update(float dt) {
     case SpaceGame::GameState::StartRound: {
         m_scene->RemoveAllActors();
 
+        //auto player = viper::Factory::Instance().Create<viper::Actor>("player");
+        auto player = viper::Instantiate("player");
+        m_scene->AddActor(std::move(player));
 
 
         if (!m_backgroundMusicStarted) {
@@ -142,6 +149,7 @@ void SpaceGame::Shutdown() {
 }
 
 void SpaceGame::Draw(viper::Renderer& renderer) {
+    m_scene->Draw(renderer);
     
     if (m_gameState == GameState::Title) {
     
@@ -160,7 +168,6 @@ void SpaceGame::Draw(viper::Renderer& renderer) {
     m_livesText->Create(renderer, "LIVES: " + std::to_string(m_lives), {1, 1, 1});
     m_livesText->Draw(renderer, renderer.GetWidth() - 250, 20);
     
-    m_scene->Draw(renderer);
 
     viper::GetEngine().GetPS().Draw(renderer);
     
@@ -174,14 +181,22 @@ void SpaceGame::OnPlayerDeath() {
 }
 
 void SpaceGame::SpawnEnemy() {
+    viper::Actor* player = m_scene->GetActorByName<viper::Actor>("player");
+        if (player) {
+
+        viper::vec2 position = player->transform.position + viper::random::OnUnitCircle() * viper::random::getReal(200.0f, 500.0f);
+        viper::Transform transform{ position, 0, 5 };
+    auto enemy = viper::Instantiate("enemy", transform);
+    m_scene->AddActor(std::move(enemy));
+
+        }
+
     /*
     viper::Actor* player = m_scene->GetActorByName<viper::Actor>("player");
     if (player) {
         //std::shared_ptr<viper::Model> enemyModel = std::make_shared<viper::Model>(GameData::enemyDesign, viper::vec3{ 1, 1, 1 });
 
 
-        viper::vec2 position = player->transform.position + viper::random::OnUnitCircle() * viper::random::getReal(200.0f, 500.0f);
-        viper::Transform transform{ position, 0, 5 };
 
 
         std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform); // , viper::Resources().Get<viper::Texture>("textures/blue_01.png", viper::GetEngine().GetRenderer()));
@@ -210,5 +225,16 @@ void SpaceGame::SpawnEnemy() {
         m_scene->AddActor(std::move(enemy));
     }
     */
+}
+
+void SpaceGame::OnNotify(const viper::Event& event) {
+    if (viper::equalsIgnoreCase(event.id, "player_dead")) {
+        OnPlayerDeath();
+    } else if (viper::equalsIgnoreCase(event.id, "add_points")) {
+        AddPoints(std::get<int>(event.data));
+	}
+    //std::cout << event.id << std::endl;
+
+
 }
 
