@@ -52,7 +52,7 @@
       "components": [
         {
           "type": "Enemy",
-          "speed": 500.0,
+          "speed": 200.0,
           "rotationRate": 180,
           "fireTime": 2.0
         },

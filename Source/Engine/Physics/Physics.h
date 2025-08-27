@@ -1,5 +1,5 @@
 #pragma once
-//#include <box2d/box2d.h>
+#include <box2d/box2d.h>
 #include "memory"
 
 namespace viper{
@@ -18,6 +18,6 @@ namespace viper{
 		vec2 WorldToPixel(const vec2& world) {}
 
 	private:
-		//b2WorldId m_worldId;
+		b2WorldId m_worldId;
 	};
 }
