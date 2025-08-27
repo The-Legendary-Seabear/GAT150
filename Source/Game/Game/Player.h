@@ -18,8 +18,12 @@ public:
 	float boostCountDown = 5.0f;
 	float canFire = false;
 
+	viper::RigidBody* m_rigidBody{ nullptr };
+
 public:
 	Player() = default;
+
+	void Start() override;
 		
 	void Update(float dt) override;
 

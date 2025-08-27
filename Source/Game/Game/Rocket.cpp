@@ -23,7 +23,7 @@ void Rocket::Update(float dt) {
     viper::vec2 force = viper::vec2{ 1,0 }.Rotate(viper::math::degToRad(owner->transform.rotation)) * speed;
     
     if (m_rigidBody) {
-        m_rigidBody->velocity = force;
+		m_rigidBody->ApplyForce(force);
     }
    
 

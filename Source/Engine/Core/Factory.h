@@ -74,7 +74,7 @@ namespace viper {
 		std::string key = toLower(name);
 		//add creator to registry
 		m_registry[key] = std::make_unique<Creator<T>>();
-
+		
 		Logger::Info("{} added to factory.", name);
 		
 	}

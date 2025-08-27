@@ -7,6 +7,10 @@
 
 FACTORY_REGISTER(Player)
 
+void Player::Start() {
+    m_rigidBody = owner->GetComponent<viper::RigidBody>();
+}
+
 void Player::Update(float dt) {
   
 
@@ -19,7 +23,8 @@ void Player::Update(float dt) {
         CreateParticle();
         rotate += 1; }
 
-    owner->transform.rotation += (rotate * rotationRate) * dt;
+    //owner->transform.rotation += (rotate * rotationRate) * dt;
+    m_rigidBody->ApplyTorque(rotate * rotationRate);
 
     //thrust
     float thrust = 0;
@@ -41,9 +46,9 @@ void Player::Update(float dt) {
     viper::vec2 direction{ 1, 0 };
     viper::vec2 force = direction.Rotate(viper::math::degToRad(owner->transform.rotation)) * thrust * speed;
 	//velocity += force * dt;
-    auto* rb = owner->GetComponent<viper::RigidBody>();
-    if (rb) {
-        rb->velocity += force * dt;
+    //auto* rb = owner->GetComponent<viper::RigidBody>();
+    if (m_rigidBody) {
+        m_rigidBody->ApplyForce(force);
     }
 
     owner->transform.position.x = viper::math::wrap(owner->transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
