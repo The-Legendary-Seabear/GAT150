@@ -1,0 +1,48 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "tilemap.json": {
+            "scale": 2.7272916666666664,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.98166679398062,
+                "y": 160.04888854938508
+            }
+        },
+        "tilemap.tmx": {
+            "scale": 1.30625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 514.8325358851675,
+                "y": 329.5693779904306
+            }
+        },
+        "tilemap.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/akohn/source/repos/GAT150/Build/Assets/Platformer/Tilemaps",
+    "last.imagePath": "C:/Users/akohn/source/repos/GAT150/Build/Assets/Platformer/Textures",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "tilemap.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

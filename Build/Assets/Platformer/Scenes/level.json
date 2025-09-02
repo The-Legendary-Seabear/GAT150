@@ -23,6 +23,23 @@
       "persistent": true,
       "transform": {
         "position": [
+          0,
+          0
+        ],
+        "rotation": 0,
+        "scale": 1
+      },
+      "components": [
+        {
+          "type": "TilemapRenderer",
+          "tilemap_name": "tilemaps/tilemap.json"
+        }
+      ]
+    },
+    {
+      "persistent": true,
+      "transform": {
+        "position": [
           460,
           640
         ],
@@ -89,7 +106,7 @@
           700
         ],
         "rotation": 0,
-        "scale": 1
+        "scale": 4
       },
       "components": [
         {
