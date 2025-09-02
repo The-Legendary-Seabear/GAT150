@@ -26,7 +26,8 @@ namespace viper {
         m_width = width;
         m_height = height;
 
-        m_window = SDL_CreateWindow(name.c_str(), width, height, fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+        //m_window = SDL_CreateWindow(name.c_str(), width, height, fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+        m_window = SDL_CreateWindow(name.c_str(), width, height, 0);
         if (m_window == nullptr) {
             Logger::Error("SDL_CreateWindow Error: {}", SDL_GetError());
             
@@ -113,6 +114,22 @@ namespace viper {
 
         SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);
 
+    }
+
+    void Renderer::DrawTexture(Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale) {
+        SDL_FRect srcRect;
+        srcRect.x = sourceRect.x;
+        srcRect.y = sourceRect.y;
+        srcRect.w = sourceRect.w;
+        srcRect.h = sourceRect.h;
+
+        SDL_FRect destRect;
+        destRect.x = srcRect.x * scale;
+        destRect.y = srcRect.y * scale;
+        destRect.w = x - srcRect.w * 0.5f;
+        destRect.h = y - srcRect.h * 0.5f;
+
+        SDL_RenderTextureRotated(m_renderer, texture.m_texture, &srcRect, &destRect, angle, NULL, SDL_FLIP_NONE);
     }
 
 }

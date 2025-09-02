@@ -193,13 +193,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">GamePCH.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Game\Enemy.cpp" />
-    <ClCompile Include="Game\FireratePowerup.cpp" />
-    <ClCompile Include="Game\GameData.cpp" />
-    <ClCompile Include="Game\Laser.cpp" />
-    <ClCompile Include="Game\Player.cpp" />
-    <ClCompile Include="Game\Rocket.cpp" />
-    <ClCompile Include="Game\SpaceGame.cpp" />
+    <ClCompile Include="Platformer\EnemyController.cpp" />
+    <ClCompile Include="Platformer\PlatformerGame.cpp" />
+    <ClCompile Include="Platformer\PlayerController.cpp" />
+    <ClCompile Include="Space\Enemy.cpp" />
+    <ClCompile Include="Space\FireratePowerup.cpp" />
+    <ClCompile Include="Space\GameData.cpp" />
+    <ClCompile Include="Space\Laser.cpp" />
+    <ClCompile Include="Space\Player.cpp" />
+    <ClCompile Include="Space\Rocket.cpp" />
+    <ClCompile Include="Space\SpaceGame.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -209,19 +212,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePCH.h" />
-    <ClInclude Include="Game\Enemy.h" />
-    <ClInclude Include="Game\FireratePowerup.h" />
-    <ClInclude Include="Game\GameData.h" />
-    <ClInclude Include="Game\Laser.h" />
-    <ClInclude Include="Game\Player.h" />
-    <ClInclude Include="Game\Rocket.h" />
-    <ClInclude Include="Game\SpaceGame.h" />
+    <ClInclude Include="Platformer\EnemyController.h" />
+    <ClInclude Include="Platformer\PlatformerGame.h" />
+    <ClInclude Include="Platformer\PlayerController.h" />
+    <ClInclude Include="Space\Enemy.h" />
+    <ClInclude Include="Space\FireratePowerup.h" />
+    <ClInclude Include="Space\GameData.h" />
+    <ClInclude Include="Space\Laser.h" />
+    <ClInclude Include="Space\Player.h" />
+    <ClInclude Include="Space\Rocket.h" />
+    <ClInclude Include="Space\SpaceGame.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Build\Assets\Meshes\enemy.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Build\Assets\scene.json" />
+    <None Include="..\..\Build\Assets\Platformer\Scenes\level.json" />
+    <None Include="..\..\Build\Assets\Platformer\Scenes\prototypes.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,7 +24,7 @@ void Player::Update(float dt) {
         rotate += 1; }
 
     //owner->transform.rotation += (rotate * rotationRate) * dt;
-    m_rigidBody->ApplyTorque(rotate * rotationRate);
+    m_rigidBody->ApplyTorque((rotate * rotationRate) * dt);
 
     //thrust
     float thrust = 0;
@@ -176,6 +176,7 @@ void Player::Read(const viper::json::value_t& value) {
     JSON_READ(value, speed);
     JSON_READ(value, rotationRate);
     JSON_READ(value, fireTime);
+
 }
 
 void Player::CreateParticle() {

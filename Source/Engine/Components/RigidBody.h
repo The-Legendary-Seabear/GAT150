@@ -9,6 +9,7 @@ namespace viper {
 
 		vec2 velocity{ 0, 0 };
 		float damping{ 0 };
+		vec2 scale{ 1, 1 };
 
 	public:
 		RigidBody() = default;

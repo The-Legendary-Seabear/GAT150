@@ -1,5 +1,6 @@
 
-#include "Game/SpaceGame.h"
+//#include "Game/SpaceGame.h"
+#include "Platformer/PlatformerGame.h"
 
 
 
@@ -9,7 +10,7 @@ int main(int argc, char* argv[]) {
 
     //return 0;
 
-    viper::file::SetCurrentDirectory("Assets");
+    viper::file::SetCurrentDirectory("Assets/Platformer");
 
    //initialize engine
     viper::GetEngine().Initialize();
@@ -17,7 +18,7 @@ int main(int argc, char* argv[]) {
     viper::Logger::Info("Initialize engine...");
 
     //Initialize Game
-    std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
+    std::unique_ptr<viper::Game> game = std::make_unique<PlatformerGame>();
     game->Initialize();
 
     //create objects
