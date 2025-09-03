@@ -102,7 +102,7 @@ namespace viper {
         SDL_RenderTexture(m_renderer, texture.m_texture, NULL, &destRect);
     }
 
-    void Renderer::DrawTexture(Texture& texture, float x, float y, float angle, float scale) {
+    void Renderer::DrawTexture(Texture& texture, float x, float y, float angle, float scale, bool flipH) {
         vec2 size = texture.GetSize();
 
         SDL_FRect destRect;
@@ -112,11 +112,11 @@ namespace viper {
         destRect.y = y - destRect.h * 0.5f;
 
 
-        SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);
+        SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, (flipH ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL));
 
     }
 
-    void Renderer::DrawTexture(Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale) {
+    void Renderer::DrawTexture(Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale, bool flipH) {
         SDL_FRect srcRect;
         srcRect.x = sourceRect.x;
         srcRect.y = sourceRect.y;
@@ -129,7 +129,7 @@ namespace viper {
         destRect.w = x - srcRect.w * 0.5f;
         destRect.h = y - srcRect.h * 0.5f;
 
-        SDL_RenderTextureRotated(m_renderer, texture.m_texture, &srcRect, &destRect, angle, NULL, SDL_FLIP_NONE);
+        SDL_RenderTextureRotated(m_renderer, texture.m_texture, &srcRect, &destRect, angle, NULL, (flipH ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL));
     }
 
 }

@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "tilemap.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "tilemap.json": {
@@ -35,10 +36,15 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
+        "tilemap.tmx",
+        "tilemap.json",
+        "tilemap.tsx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
-        "tilemap.tsx"
+        "tilemap.tsx",
+        "tilemap.json",
+        "tilemap.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

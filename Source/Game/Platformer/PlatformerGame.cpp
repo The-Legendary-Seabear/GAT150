@@ -93,3 +93,9 @@
 		auto enemy = viper::Instantiate("bat");
 		m_scene->AddActor(std::move(enemy));
 	}
+
+	void PlatformerGame::SpawnCoin() {
+		auto pickup = viper::Instantiate("coin_pickup");
+		pickup->transform.position = viper::vec2{ viper::random::getReal(0.0f, 1080.0f), viper::random::getReal(0.0f, 1080.0f) };
+		m_scene->AddActor(std::move(pickup));
+	}

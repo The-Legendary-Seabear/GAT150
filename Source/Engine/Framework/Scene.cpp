@@ -26,6 +26,7 @@ namespace viper {
 
 
 	//check for collisions
+		/*
 	for (auto& actorA : m_actors) {
 		for (auto& actorB : m_actors) {
 			continue;
@@ -44,6 +45,7 @@ namespace viper {
 			}
 		}
 	}
+		*/
 
 
 	}
