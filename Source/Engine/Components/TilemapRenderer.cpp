@@ -60,7 +60,7 @@ namespace viper {
 				if (tileId == 0) continue;
 
 				rect source = m_tilemap->GetTextureRect(layer, tileId);
-				vec2 position = owner->transform.position + m_tilemap->GetPosition(layer, i) * owner->transform.scale;
+				vec2 position = owner->transform.position + m_tilemap->GetPosition(layer, i); //* owner->transform.scale;
 
 				renderer.DrawTexture(*layer.texture, source, position.x, position.y, owner->transform.rotation, owner->transform.scale);
 			}

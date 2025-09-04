@@ -71,6 +71,6 @@ namespace viper {
 	vec2 Tilemap::GetPosition(const Layer& layer, int tileIndex) {
 		int tileX = tileIndex % layer.width;
 		int tileY = tileIndex / layer.width;
-		return vec2{(float)tileX * tilewidth, (float)tileY} * tileheight;
+		return vec2{ (float)tileX * tilewidth, (float)tileY * tileheight } ;
 	}
 }

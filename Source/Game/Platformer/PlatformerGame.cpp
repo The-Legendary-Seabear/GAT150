@@ -37,7 +37,7 @@
 		case PlatformerGame::GameState::StartRound:
 			SpawnPlayer();
 			//SpawnEnemy();
-			SpawnBat();
+			//SpawnBat();
 			m_gameState = GameState::Game;
 
 			break;
@@ -95,7 +95,7 @@
 	}
 
 	void PlatformerGame::SpawnCoin() {
-		auto pickup = viper::Instantiate("coin_pickup");
-		pickup->transform.position = viper::vec2{ viper::random::getReal(0.0f, 1080.0f), viper::random::getReal(0.0f, 1080.0f) };
-		m_scene->AddActor(std::move(pickup));
+		//auto pickup = viper::Instantiate("coin_pickup");
+		//pickup->transform.position = viper::vec2{ viper::random::getReal(0.0f, 1080.0f), viper::random::getReal(0.0f, 1080.0f) };
+		//m_scene->AddActor(std::move(pickup));
 	}

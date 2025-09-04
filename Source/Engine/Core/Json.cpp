@@ -150,7 +150,7 @@ namespace viper::json {
             }
 
             // get the data
-            data[i] = array[i].GetInt();
+            data.push_back(array[i].GetInt());
         }
 
         return true;

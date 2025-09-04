@@ -36,7 +36,7 @@ void PlayerController::Update(float dt) {
 
 
 void PlayerController::OnCollision(viper::Actor* other) {
-	std::cout << other.name << std::endl;
+	//std::cout << other.name << std::endl;
 }
 
 void PlayerController::Read(const viper::json::value_t& value) {
