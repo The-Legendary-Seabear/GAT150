@@ -124,10 +124,10 @@ namespace viper {
         srcRect.h = sourceRect.h;
 
         SDL_FRect destRect;
-        destRect.x = srcRect.x * scale;
-        destRect.y = srcRect.y * scale;
-        destRect.w = x - srcRect.w * 0.5f;
-        destRect.h = y - srcRect.h * 0.5f;
+        destRect.w = srcRect.w * scale;
+        destRect.h = srcRect.h * scale;
+        destRect.x =  x - srcRect.w * 0.5f;
+        destRect.y = y - srcRect.h * 0.5f;
 
         SDL_RenderTextureRotated(m_renderer, texture.m_texture, &srcRect, &destRect, angle, NULL, (flipH ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL));
     }
