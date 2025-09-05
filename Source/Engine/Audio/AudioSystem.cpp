@@ -56,7 +56,7 @@ namespace viper {
 	/// <returns>True if the sound was successfully added; false if the name already exists or if loading the sound failed.</returns>
 	bool AudioSystem::AddSound(const std::string& fileName, const std::string& name) {
 
-
+		/*
 		std::string key = (name.empty() ? fileName : name);
 
 		//convert to lowercase
@@ -76,11 +76,13 @@ namespace viper {
 
 		//insert sound into map
 		m_sounds[key] = sound;
-		//audio->createSound(fileName.c_str(), FMOD_DEFAULT, 0, &sound);
+		audio->createSound(fileName.c_str(), FMOD_DEFAULT, 0, &sound);
+		*/
 		return true;
 	}
 
 	bool AudioSystem::AddBackGroundMusic(const std::string& fileName, const std::string& name) {
+		/*
 		std::string key = (name.empty() ? fileName : name);
 
 		//convert to lowercase
@@ -100,7 +102,8 @@ namespace viper {
 
 		//insert sound into map
 		m_sounds[key] = sound;
-		//audio->createSound(fileName.c_str(), FMOD_DEFAULT, 0, &sound);
+		audio->createSound(fileName.c_str(), FMOD_DEFAULT, 0, &sound);
+		*/
 		return true;
 	}
 
@@ -124,15 +127,15 @@ namespace viper {
 		FMOD::Channel* channel = nullptr;
 
 		//play cound from key
-		//FMOD_RESULT result = m_system->playSound(m_sounds[key], 0, false, nullptr);
+		FMOD_RESULT result = m_system->playSound(m_sounds[key], 0, false, nullptr);
 
 		m_channels[key] = channel;
 		
 		return true;
 	}
 	bool AudioSystem::PlaySound(AudioClip& audioClip) {
-		//FMOD_RESULT result = m_system->playSound(audioClip.m_sound, 0, false, nullptr);
-		//if (!CheckFMODResult(result)) return false;
+		FMOD_RESULT result = m_system->playSound(audioClip.m_sound, 0, false, nullptr);
+		if (!CheckFMODResult(result)) return false;
 		return true;
 	}
 	bool AudioSystem::StopSound() {

@@ -198,6 +198,8 @@
     <ClCompile Include="Platformer\Pickup.cpp" />
     <ClCompile Include="Platformer\PlatformerGame.cpp" />
     <ClCompile Include="Platformer\PlayerController.cpp" />
+    <ClCompile Include="Platformer\Powerup.cpp" />
+    <ClCompile Include="Platformer\RocketController.cpp" />
     <ClCompile Include="Space\Enemy.cpp" />
     <ClCompile Include="Space\FireratePowerup.cpp" />
     <ClCompile Include="Space\GameData.cpp" />
@@ -219,6 +221,8 @@
     <ClInclude Include="Platformer\Pickup.h" />
     <ClInclude Include="Platformer\PlatformerGame.h" />
     <ClInclude Include="Platformer\PlayerController.h" />
+    <ClInclude Include="Platformer\Powerup.h" />
+    <ClInclude Include="Platformer\RocketController.h" />
     <ClInclude Include="Space\Enemy.h" />
     <ClInclude Include="Space\FireratePowerup.h" />
     <ClInclude Include="Space\GameData.h" />

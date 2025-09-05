@@ -1,26 +1,26 @@
-#include "Pickup.h"
+#include "Powerup.h"
 #include "EnemyController.h"
 #include "../GamePCH.h"
 
-FACTORY_REGISTER(Pickup)
+FACTORY_REGISTER(Powerup)
 
-void Pickup::Start() {
+void Powerup::Start() {
 	m_rigidBody = owner->GetComponent<viper::RigidBody>();
 }
 
-void Pickup::Update(float dt) {
+void Powerup::Update(float dt) {
 	//
 }
 
 
-void Pickup::OnCollision(viper::Actor* other) {
+void Powerup::OnCollision(viper::Actor* other) {
 	if (viper::equalsIgnoreCase(other->tag, "player")) {
 		owner->destroyed = true;
 		EVENT_NOTIFY_DATA(add_points, 100);
 	}
 }
 
-void Pickup::Read(const viper::json::value_t& value) {
+void Powerup::Read(const viper::json::value_t& value) {
 	Object::Read(value);
 
 }

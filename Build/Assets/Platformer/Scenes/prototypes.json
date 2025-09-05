@@ -37,6 +37,42 @@
       ]
     },
     {
+      "name": "platformrocket",
+      "tag": "rocket",
+      "transform": {
+        "position": [
+          640,
+          512
+        ],
+        "rotation": 0,
+        "scale": 1
+      },
+      "components": [
+        {
+          "type": "RocketController",
+          "speed": 70.0,
+          "maxSpeed": 100,
+          "jump": 500
+        },
+        {
+          "type": "SpriteRenderer",
+          "texture_name": "textures/rocket.png"
+        },
+        {
+          "type": "RigidBody",
+          "gravityScale": 1.0,
+          "constrainAngle": true,
+          "shape": "capsule",
+          "scale": [ 1, 1 ]
+        },
+        {
+          "type": "CircleCollider2D",
+          "radius": 60
+        }
+
+      ]
+    },
+    {
       "name": "platformenemy",
       "tag": "enemy",
       "transform": {
@@ -85,7 +121,7 @@
       "components": [
         {
           "type": "FlyingEnemyController",
-          "speed": 100,
+          "speed": 30,
           "maxSpeed": 100
         },
         {
@@ -104,10 +140,14 @@
           "type": "RigidBody",
           "gravityScale": 0.0,
           "constrainAngle": true,
-          "isSensor": true,
+          "isSensor": false,
           "shape": "circle",
           "scale": [ 1, 1 ],
           "size": [ 40, 40 ]
+        },
+        {
+          "type": "CircleCollider2D",
+          "radius": 60
         }
       ]
     },
@@ -137,6 +177,46 @@
             {
               "name": "idle",
               "texture_animation": "animations/coin_idle.json"
+            }
+          ]
+        },
+        {
+          "type": "RigidBody",
+          "gravityScale": 1.0,
+          "constrainAngle": true,
+          "isSensor": false,
+          "shape": "circle",
+          "scale": [ 1, 1 ],
+          "size": [ 40, 40 ]
+        }
+      ]
+    },
+    {
+      "name": "powerup_pickup",
+      "tag": "powerup",
+      "transform": {
+        "position": [
+          740,
+          500
+        ],
+        "rotation": 0,
+        "scale": 1
+      },
+      "components": [
+        {
+          "type": "Powerup",
+          "speed": 100,
+          "maxSpeed": 100
+        },
+        {
+          "type": "SpriteRenderer"
+        },
+        {
+          "type": "Animator",
+          "animations": [
+            {
+              "name": "idle",
+              "texture_animation": "animations/powerup_idle.json"
             }
           ]
         },
